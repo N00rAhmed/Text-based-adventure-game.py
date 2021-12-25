@@ -63,12 +63,14 @@ def path():
     print('choose wisely!!!!!!! ')
     print()
 
+    
 def choice():
     d = ''
     while d != '1' and d != '2':
         time.sleep(1)
         d = input('So which one do you want to go on, path 1 or 2: ')
     return d
+
 
 def wtf(rightpath):
     t = random.randint(1,2)
