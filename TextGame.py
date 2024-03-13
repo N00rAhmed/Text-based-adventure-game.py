@@ -268,7 +268,7 @@ def level2():
     def draw_running_man(position):
         clear_screen()
         
-        ascii_art = """ ──────────────────────██
+        ascii_art = """ ──────────────────────────██
                     ▄───▄▀█▄▄▄▄
                     ─ ▄▀─█▄▄
                     ▄▄▄▀───▀▄
