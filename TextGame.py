@@ -13,9 +13,16 @@ def start():
     animate_text("I am a Simulated Artificial Machine but you can call me S.A.M.")
     smileyface()
 
-def smileyface():
+def smileyface(color_code='#40E0D0'):
+    # Convert hex color code to RGB
+    r = int(color_code[1:3], 16)
+    g = int(color_code[3:5], 16)
+    b = int(color_code[5:], 16)
+    # Calculate ANSI escape code for 8-bit color
+    ansi_color_code = f'\033[38;2;{r};{g};{b}m'
+
     time.sleep(0.3)
-    print('__________________ ')
+    print(ansi_color_code + '__________________ ')
     time.sleep(0.3)
     print('|                |')
     time.sleep(0.3)
@@ -26,24 +33,38 @@ def smileyface():
     print('|   \_______/    |')
     time.sleep(0.3)
     print('|________________|')
+    print('\033[0m')  # Reset color
 
 
-def animate_text(text, sleep_duration=0.1):
+# def animate_text(text, sleep_duration=0.1):
+#     for char in text:
+#         print(char, end='', flush=True)
+#         time.sleep(sleep_duration)
+#     print()
+
+def animate_text(text, sleep_duration=0.1, color_code='#40E0D0'):
+    # Convert hex color code to RGB
+    r = int(color_code[1:3], 16)
+    g = int(color_code[3:5], 16)
+    b = int(color_code[5:], 16)
+    # Calculate ANSI escape code for 8-bit color
+    ansi_color_code = f'\033[38;2;{r};{g};{b}m'
+
     for char in text:
-        print(char, end='', flush=True)
+        print(f'{ansi_color_code}{char}', end='', flush=True)
         time.sleep(sleep_duration)
-    print()
+    print('\033[0m')  # Reset color at the end of the text
 
 
 def lose_select():
     time.sleep(3)
-    print('I have been given an option to show you')
+    animate_text('I have been given an option to show you')
     time.sleep(3)
-    print('Someone has injected a new option')
+    animate_text('Someone has injected a new option')
     time.sleep(3)
-    print('if you get it right then you can continue')
+    animate_text('if you get it right then you can continue')
     time.sleep(3)
-    print('if you get it wrong then you will lose again')
+    animate_text('if you get it wrong then you will lose again')
     time.sleep(3)
 
     select_choose = ''
@@ -51,9 +72,9 @@ def lose_select():
         select_choose = input('What do you choose, the red pill or the blue pill: ')
 
         if select_choose == 'blue pill':
-            print('congrats you chose the correct option!!!')
+            animate_text('congrats you chose the correct option!!!')
         elif select_choose == 'red pill':
-            print('WRONGGGG !!!!')
+            animate_text('WRONGGGG !!!!')
             sys.exit()
 
 # First obstacle
@@ -65,9 +86,9 @@ def level1():
         #if chosen option and outcome of option
         if question_one == 'run away':
             time.sleep(3)
-            print('Unfortunately you have now been hunted down by an army of robots and have been executed')    
+            animate_text('Unfortunately you have now been hunted down by an army of robots and have been executed')    
             time.sleep(3)
-            print('too bad')
+            animate_text('too bad')
             
             lose_select()
             level1()
@@ -89,21 +110,21 @@ def level1():
         
         elif question_one == 'shoot robot in head':
             time.sleep(3)
-            print('Congratulations you shot the robot in the head and are not dead!!')
+            animate_text('Congratulations you shot the robot in the head and are not dead!!')
             
 
 def path():
     # story generated
     time.sleep(3)
-    print('You are running away from the robots but...')
+    animate_text('You are running away from the robots but...')
     time.sleep(3)
-    print('there is a dangerous path of an army of robots coming your way')
+    animate_text('there is a dangerous path of an army of robots coming your way')
     time.sleep(3)
-    print('you have got two paths that you can go down')
+    animate_text('you have got two paths that you can go down')
     time.sleep(3)
-    print('but you have to decide which one is the correct one since one of them is a dead end')
+    animate_text('but you have to decide which one is the correct one since one of them is a dead end')
     time.sleep(3)
-    print('choose wisely!!!!!!! ')
+    animate_text('choose wisely!!!!!!! ')
     print()
 
 # Second obstacle
@@ -121,7 +142,7 @@ def random_select(rightpath):
 
     if rightpath == str(select):
         time.sleep(3)
-        print('good you went down the correct path and cheated death!!')  
+        animate_text('good you went down the correct path and cheated death!!')  
         # level2()
         restart = new_level()
         random_key(restart)
@@ -129,9 +150,9 @@ def random_select(rightpath):
 
     else:
         time.sleep(3)
-        print('oh no you have been spotted by the robots!!!')
+        animate_text('oh no you have been spotted by the robots!!!')
         time.sleep(3)
-        print('and you have been shot multiple time and are now dead.')
+        animate_text('and you have been shot multiple time and are now dead.')
         lose_select()
         path()
         again = choice()
@@ -140,11 +161,11 @@ def random_select(rightpath):
 
 def new_level():
         time.sleep(3)
-        print('I have given u two keys but a virus has entered my system')
+        animate_text('I have given u two keys but a virus has entered my system')
         time.sleep(3)
-        print('now I dont know which is the correct key but u have to select it')
+        animate_text('now I dont know which is the correct key but u have to select it')
         time.sleep(3)
-        print('if u choose the correct one then u can continue, but if wrong then you will die... ')
+        animate_text('if u choose the correct one then u can continue, but if wrong then you will die... ')
 
         question_three = ''
         while question_three != '4' and question_three != '5':
@@ -159,12 +180,12 @@ def random_key(correct_path):
 
     if correct_path == str(select):
         time.sleep(3)
-        print('good you chose the correct option')
+        animate_text('good you chose the correct option')
         item ()
         
     else:
         time.sleep(3)
-        print('You are now dead')
+        animate_text('You are now dead')
         time.sleep(3)
 
         lose_select()
@@ -180,25 +201,25 @@ def item ():
         # question_one = ''
     # while question_one != 'run away' and question_one != 'shoot robot in head':
     time.sleep(3)
-    print('oh no')
+    animate_text('oh no')
     time.sleep(3)
-    print('in my system I have been given a new object')
+    animate_text('in my system I have been given a new object')
     time.sleep(3)
-    print('do you want to take the object or not')
+    animate_text('do you want to take the object or not')
     time.sleep(3)
-    print('Choose Wisely!!!!!')
+    animate_text('Choose Wisely!!!!!')
     object = ''
     while object != 'yes' and object != 'no':
         object = input('yes or no: ')
         if object == 'yes':
             time.sleep(3)
-            print('great!!! you have chosen the healing potion which allows you to heal from any attacks')
+            animate_text('great!!! you have chosen the healing potion which allows you to heal from any attacks')
             level2()
         elif object == 'no':
             time.sleep(3)
-            print('oh no')
+            animate_text('oh no')
             time.sleep(3)
-            print('you fool, you have missed out on an incredible item known as the healing potion.')
+            animate_text('you fool, you have missed out on an incredible item known as the healing potion.')
             level2()
 
 
@@ -207,32 +228,32 @@ def item ():
         # question_one = ''
     # while question_one != 'run away' and question_one != 'shoot robot in head':
     time.sleep(3)
-    print('oh no')
+    animate_text('oh no')
     time.sleep(3)
-    print('in my system I have been given a new object')
+    animate_text('in my system I have been given a new object')
     time.sleep(3)
-    print('do you want to take the object or not')
+    animate_text('do you want to take the object or not')
     time.sleep(3)
-    print('Choose Wisely!!!!!')
+    animate_text('Choose Wisely!!!!!')
     object = ''
     while object != 'yes' and object != 'no':
         object = input('yes or no: ')
         if object == 'yes':
             time.sleep(3)
-            print('great!!! you have chosen the healing potion which allows you to heal from any attacks')
+            animate_text('great!!! you have chosen the healing potion which allows you to heal from any attacks')
             level2()
         elif object == 'no':
             time.sleep(3)
-            print('oh no')
+            animate_text('oh no')
             time.sleep(3)
-            print('you fool, you have missed out on an incredible item known as the healing potion.')
+            animate_text('you fool, you have missed out on an incredible item known as the healing potion.')
             time.sleep(3)
-            print('...')
+            animate_text('...')
             level2()
 
 def level2():
     time.sleep(3)
-    print('You are now running far away from the robots')
+    animate_text('You are now running far away from the robots')
 
     time.sleep(3)
     # print(""" ──────────────────────██
@@ -273,7 +294,7 @@ def level2():
 
 
     time.sleep(3)
-    print('and all of a sudden you see a cyborg in the distance')
+    animate_text('and all of a sudden you see a cyborg in the distance')
     time.sleep(2)
     print("""   _______                   ________    |
     |ooooooo|      ____       | __  __ |   |
@@ -290,13 +311,13 @@ def level2():
         ____    |___||___|                     \
     """)
     time.sleep(3)
-    print('he has been sent to capture you and take you back to the robots!!!')
+    animate_text('he has been sent to capture you and take you back to the robots!!!')
 
     time.sleep(3)
-    print('three items are infront of you ')
+    animate_text('three items are infront of you ')
 
     time.sleep(3)
-    print("a mech suit")
+    animate_text("a mech suit")
     time.sleep(2)
     print("""           ___
           |_|_|
@@ -325,7 +346,7 @@ def level2():
 """)
 
     time.sleep(3)
-    print("tank")
+    animate_text("tank")
     time.sleep(2)
     print("""░░░░░░███████ ]▄▄▄▄▄▄▄▄
     ▂▄▅█████████▅▄▃▂
@@ -334,7 +355,7 @@ def level2():
     """)
 
     time.sleep(3)
-    print('bomb')
+    animate_text('bomb')
 
     time.sleep(2)
     print("""             . . .                         
@@ -369,33 +390,33 @@ def level2():
 
         if (items == 'tank'):
             time.sleep(3)
-            print('oh no the cyborg has ripped through the tank')
+            animate_text('oh no the cyborg has ripped through the tank')
             time.sleep(3)
-            print('you are running away to find safety')
+            animate_text('you are running away to find safety')
             time.sleep(3)
-            print('but the cyborg has seen you and captured you')
+            animate_text('but the cyborg has seen you and captured you')
             lose_select()
             level2()
 
         elif (items == 'bomb'):
             time.sleep(3)
-            print('you throw the bomb and it exlodes')
+            animate_text('you throw the bomb and it exlodes')
             time.sleep(3)
-            print('but it doesnt even lay a scratch on him')
+            animate_text('but it doesnt even lay a scratch on him')
             time.sleep(3)
-            print('because he is made from vibranium')
+            animate_text('because he is made from vibranium')
             time.sleep(3)
-            print('you are instantly captured now')
+            animate_text('you are instantly captured now')
             lose_select()
             level2()
 
         elif (items == "mech suit"):
             time.sleep(3)
-            print('you are now in the mech suit')
+            animate_text('you are now in the mech suit')
             time.sleep(3)
-            print('the cyborg is running towards you')
+            animate_text('the cyborg is running towards you')
             time.sleep(3)
-            print('this suit is highly advanced and gives you a ton of diffrent options')
+            animate_text('this suit is highly advanced and gives you a ton of diffrent options')
             suit_options()
 #     question_one = ''
     # while question_one != 'run away' and question_one != 'shoot robot in head':
@@ -406,11 +427,11 @@ def combat_option():
         combat_moves = input("do you want to throw a right hook or head butt: ")
         if (combat_moves == 'right hook'):
             time.sleep(3)
-            print('wow your right hook to the cyborg was so DEVASTATING that it has killed him')
+            animate_text('wow your right hook to the cyborg was so DEVASTATING that it has killed him')
             level3()
         elif (combat_moves == 'head butt'):
             time.sleep(3)
-            print('incredible your head butt has KNOCKED OUT the cyborg')
+            animate_text('incredible your head butt has KNOCKED OUT the cyborg')
             level3()
 
 def suit_options():
@@ -421,7 +442,7 @@ def suit_options():
 
             if (select_option == "rocket fist"):
                 time.sleep(3)
-                print('good the cyborg is extremely disorientated')
+                animate_text('good the cyborg is extremely disorientated')
                 combat_option()
                 # def combat_option():
                 #     combat_moves = ''
@@ -439,9 +460,9 @@ def suit_options():
 
             elif (select_option == 'missile'):
                 time.sleep(3)
-                print('oh no the cyborg is made from vibranium')
+                animate_text('oh no the cyborg is made from vibranium')
                 time.sleep(3)
-                print('the cyborg punches you and takes you back to the robots')
+                animate_text('the cyborg punches you and takes you back to the robots')
                 
                 lose_select()
                 suit_options()
@@ -449,18 +470,18 @@ def suit_options():
 
             elif (select_option == 'body slam'):
                 time.sleep(3)
-                print('the cyborg has been knocked unconsious good job')
+                animate_text('the cyborg has been knocked unconsious good job')
                 time.sleep(3)
-                print('u have enough time to run')
+                animate_text('u have enough time to run')
                 level3()
 
 def level3():
     time.sleep(3)
-    print('after that battle you are completely drained and are trying to find safety')
+    animate_text('after that battle you are completely drained and are trying to find safety')
     time.sleep(3)
-    print('after walking for hours you come across a strange looking object')
+    animate_text('after walking for hours you come across a strange looking object')
     time.sleep(3)
-    print('the strange looking object looks like a computer from the past')
+    animate_text('the strange looking object looks like a computer from the past')
     time.sleep(4)
     print("""
 ▐▓█▀▀▀▀▀▀▀▀▀█▓▌░▄▄▄▄▄░
@@ -470,7 +491,7 @@ def level3():
 ░░░░▄▄███▄▄░░░░░█████░
     """)
     time.sleep(3)
-    print('there is a video recording on it')
+    animate_text('there is a video recording on it')
 #     question_one = ''
     # while question_one != 'run away' and question_one != 'shoot robot in head':
     message = ''
@@ -484,26 +505,26 @@ def level3():
             time.sleep(2)
             print('.')
             time.sleep(3)
-            print('Computer: We have found a way to end the war')
+            animate_text('Computer: We have found a way to end the war')
             time.sleep(3)
             print('We have ...')
             time.sleep(5)
-            print("Computer: We have created an algorithm which can search and terminate all AI organisms")
+            animate_text("Computer: We have created an algorithm which can search and terminate all AI organisms")
             time.sleep(2)
-            print('Computer: OH NO')
+            animate_text('Computer: OH NO')
             time.sleep(3)
-            print('Computer: the machines have invaded our base')
+            animate_text('Computer: the machines have invaded our base')
             time.sleep(3)
             print("/@)|¬!}{")
             algorithm()
         
         elif message == 'no':
             time.sleep(3)
-            print('incorrect option')
+            animate_text('incorrect option')
             time.sleep(3)
-            print('eventually ...')
+            animate_text('eventually ...')
             time.sleep(3)
-            print('you die')
+            animate_text('you die')
             lose_select()
             level3()
             # suit_options()
@@ -526,7 +547,7 @@ def algorithm():
                     time.sleep(3)
                     print('beep')
                     time.sleep(3)
-                    print('Congratulations you have sucessfully killed all of the robots in this timeline !!!!!!')
+                    animate_text('Congratulations you have sucessfully killed all of the robots in this timeline !!!!!!')
                     print("""⠀  ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣀⣀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠋⠉⠉⠉⠙⠛⠻⢶⣤⡀⠀⠀⠀⠀⠀⠀
 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⡾⠁⠀⠀⠀⠀⠀⠀⠀⠀⠈⢻⡆⠀⠀⠀⠀⠀
@@ -555,7 +576,7 @@ def algorithm():
 
                 elif (initiate == 'terminate'):
                     time.sleep(3)
-                    print('WTF !!!!')
+                    animate_text('WTF !!!!')
 
                     print("""⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣠⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
                 ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣄⠀⣠⠤⡄⠀⠀⣠⣴⣿⣿⣿⣿⣿⣿⣿⣶⣤⣀⠀⠀⣤⣭⣋⠉⠙⠻⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
@@ -627,5 +648,5 @@ while play_again == "yes" or play_again == "y":
 
 stop_game = "no"
 while stop_game == "no" or stop_game == "n":
-        print('bye')
+        animate_text('bye')
         break
