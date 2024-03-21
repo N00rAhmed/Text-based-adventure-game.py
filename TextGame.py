@@ -33,14 +33,8 @@ def smileyface(color_code='#40E0D0'):
     print('|   \_______/    |')
     time.sleep(0.3)
     print('|________________|')
-    print('\033[0m')  # Reset color
+    print('\033[0m')
 
-
-# def animate_text(text, sleep_duration=0.1):
-#     for char in text:
-#         print(char, end='', flush=True)
-#         time.sleep(sleep_duration)
-#     print()
 
 def animate_text(text, sleep_duration=0.1, color_code='#40E0D0'):
     # Convert hex color code to RGB
@@ -96,18 +90,7 @@ def level1():
             again = choice()
             random_select(again)
 
-            # restart for when user fails
-            # restart = input('Do you wanna restart: ')
-            # if restart == 'yes':
-            #     start()
-            #     level1()
-            #     path()
-            #     again = choice()
-            #     random_select(again)
-            # else:
-            #     print('bye')
-            #     sys.exit()       
-        
+       
         elif question_one == 'shoot robot in head':
             time.sleep(3)
             animate_text('Congratulations you shot the robot in the head and are not dead!!')
@@ -189,10 +172,8 @@ def random_key(correct_path):
         time.sleep(3)
 
         lose_select()
-        # path()
-        # again = choice()
-        # random_select(again)
-        
+
+
         restart = new_level()
         random_key(restart)
 
@@ -256,11 +237,7 @@ def level2():
     animate_text('You are now running far away from the robots')
 
     time.sleep(3)
-    # print(""" ──────────────────────██
-    #             ▄───▄▀█▄▄▄▄
-    #             ─ ▄▀─█▄▄
-    #             ▄▄▄▀───▀▄
-    #             ▀────────▀▀ """)
+
 
     def clear_screen():
         os.system('cls' if os.name == 'nt' else 'clear')
@@ -444,19 +421,6 @@ def suit_options():
                 time.sleep(3)
                 animate_text('good the cyborg is extremely disorientated')
                 combat_option()
-                # def combat_option():
-                #     combat_moves = ''
-                #     while combat_moves != 'right hook' and combat_moves != 'head butt':
-                #         time.sleep(3)
-                #         combat_moves = input("do you want to throw a right hook or head butt: ")
-                #         if (combat_moves == 'right hook'):
-                #             time.sleep(3)
-                #             print('wow your right hook to the cyborg was so DEVASTATING that it has killed him')
-                #             level3()
-                #         elif (combat_moves == 'head butt'):
-                #             time.sleep(3)
-                #             print('incredible your head butt has KNOCKED OUT the cyborg')
-                #             level3()
 
             elif (select_option == 'missile'):
                 time.sleep(3)
@@ -600,7 +564,6 @@ _~~|~/_|_|__/|~~~~~~~ |  / ~~~~~ |   | ~~~~~~~~
 
 
 
-# option to play again at completion of game
 play_again = "yes"
 
 while play_again == "yes" or play_again == "y":
@@ -610,9 +573,6 @@ while play_again == "yes" or play_again == "y":
     again = choice()
     random_select(again)
     
-    # restart = new_level()
-    # random_key(restart)
-
 
     time.sleep(1)
 
